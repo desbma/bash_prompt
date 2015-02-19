@@ -55,7 +55,7 @@ Prompt on ~, with 1 background Bash job:
 1. Download it to your home directory, ie with:   
 `curl https://raw.githubusercontent.com/desbma/bash_prompt/master/prompt > ~/bash_prompt`
 
-2. Edit `~/.bashrc` and replace prompt code by:  
+2. Edit _~/.bashrc_ and replace prompt code by:  
 `. ~/bash_prompt` 
 
 
