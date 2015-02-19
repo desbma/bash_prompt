@@ -20,34 +20,34 @@ This is my custom Bash prompt.
 ## Screenshots
 
 Standard prompt on ~:  
-![prompt](http://i.imgur.com/YW5tAiJ.png)
+[![prompt image](http://i.imgur.com/YW5tAiJ.png)](http://i.imgur.com/YW5tAiJ.png)
 
 Standard prompt on /some/directory:  
-![prompt](http://i.imgur.com/q2pZYUT.png)
+[![prompt image](http://i.imgur.com/q2pZYUT.png)](http://i.imgur.com/q2pZYUT.png)
 
 Prompt on ~, running as root:  
-![prompt](http://i.imgur.com/3Th47aX.png)
+[![prompt image](http://i.imgur.com/3Th47aX.png)](http://i.imgur.com/3Th47aX.png)
 
 Prompt on ~, running as root, connected to _remote_hostname_ through SSH:  
-![prompt](http://i.imgur.com/8vwCYIO.png)
+[![prompt image](http://i.imgur.com/8vwCYIO.png)](http://i.imgur.com/8vwCYIO.png)
 
 Prompt on ~, when last command returned code 1:  
-![prompt](http://i.imgur.com/ziK72i5.png)
+[![prompt image](http://i.imgur.com/ziK72i5.png)](http://i.imgur.com/ziK72i5.png)
 
 Prompt on ~, when last command returned code 127:  
-![prompt](http://i.imgur.com/gKSGb8A.png)
+[![prompt image](http://i.imgur.com/gKSGb8A.png)](http://i.imgur.com/gKSGb8A.png)
 
 Prompt on ~, when last command was interrupted with _CTRL+C_:  
-![prompt](http://i.imgur.com/jXbOha7.png)
+[![prompt image](http://i.imgur.com/jXbOha7.png)](http://i.imgur.com/jXbOha7.png)
 
 Prompt on ~, when last command was killed:  
-![prompt](http://i.imgur.com/lAJRkDq.png)
+[![prompt image](http://i.imgur.com/lAJRkDq.png)](http://i.imgur.com/lAJRkDq.png)
 
 Prompt on a repository on /some/directory with [bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):  
-![prompt](http://i.imgur.com/yIcCBGg.png)
+[![prompt image](http://i.imgur.com/yIcCBGg.png)](http://i.imgur.com/yIcCBGg.png)
 
 Prompt on ~, with 1 background Bash job:  
-![prompt](http://i.imgur.com/KHX4HHB.png)
+[![prompt image](http://i.imgur.com/KHX4HHB.png)](http://i.imgur.com/KHX4HHB.png)
 
 
 ## Installation
