@@ -1,0 +1,79 @@
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+  xterm-color) color_prompt=yes;;
+esac
+
+# enable colored prompt
+force_color_prompt=yes
+
+test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+
+if [ -n "$force_color_prompt" ]
+then
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null
+  then
+    # We have color support; assume it's compliant with Ecma-48 (ISO/IEC-6429). (Lack of such support is extremely rare, and such a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
+fi
+
+####################
+# custom prompt
+####################
+
+# standard return codes
+readonly __RETURN_CODE_OK=0
+readonly __RETURN_CODE_GENERAL_ERROR=1
+readonly __RETURN_CODE_CTRLC=130
+readonly __RETURN_CODE_KILLED=137
+
+# icons
+readonly __ICON_OK='^_^'
+readonly __ICON_GENERAL_ERROR='0_0'
+readonly __ICON_CTRLC='-_-'
+readonly __ICON_KILLED='x_x'
+readonly __ICON_UNKNOWN='ಠ_ಠ'
+
+# text style
+# for i in `seq 1 7 ; seq 30 48 ; seq 90 107 ` ; do
+#     echo -e "\e[${i}mtest\e[0m$i"
+# done
+readonly __RED='\e[0;31m'
+readonly __GREEN='\e[0;32m'
+readonly __YELLOW='\e[0;33m'
+readonly __BLUE='\e[0;34m'
+readonly __LIGHT_BLUE='\e[0;96m'
+readonly __PINK='\e[0;95m'
+readonly __BOLD_RED='\e[1;31m'
+readonly __BOLD_GREEN='\e[1;32m'
+readonly __BOLD_BLUE='\e[1;34m'
+readonly __BOLD_LIGHT_BLUE='\e[1;96m'
+readonly __BOLD_WHITE='\e[1;37m'
+readonly __BG_RED='\e[41m'
+readonly __BG_PURPLE='\e[45m'
+readonly __RESET_STYLE='\e[0m'
+
+# PS1
+if [ "$color_prompt" = yes ]
+then
+  __PS1_1="\`r=\$?; if [ \$r -eq \$__RETURN_CODE_OK ]; then echo -e \[\$__GREEN\]\$__ICON_OK\[\$__RESET_STYLE\]; elif [ \$r -eq \$__RETURN_CODE_GENERAL_ERROR ]; then echo -e \[\$__BOLD_RED\]\$__ICON_GENERAL_ERROR\[\$__RESET_STYLE\]; elif [ \$r -eq \$__RETURN_CODE_CTRLC ]; then echo -e \[\$__BOLD_RED\]\$__ICON_CTRLC\[\$__RESET_STYLE\]; elif [ \$r -eq \$__RETURN_CODE_KILLED ]; then echo -e \[\$__BOLD_RED\]\$__ICON_KILLED\[\$__RESET_STYLE\]; else echo -e \[\$__BOLD_RED\]\$__ICON_UNKNOWN \<\(\$r\)\[\$__RESET_STYLE\]; fi\` \[$__YELLOW\]\! \[$__PINK\]\t\[\e[m\] \`if [ \$(jobs -r | wc -l) -eq 1 ]; then echo -e \[\$__BOLD_LIGHT_BLUE\]\(1 bg job\)\[\$__RESET_STYLE\]\\ ; elif [ \$(jobs -r | wc -l) -gt 1 ]; then echo -e \[\$__BOLD_LIGHT_BLUE\]\(\j bg jobs\)\[\$__RESET_STYLE\]\ ; fi\`\`if [ \$UID -eq 0 ]; then echo -e \[\$__BG_RED\]\[\$__BOLD_WHITE\]\u\[\$__RESET_STYLE\]; else echo -e \[\$__BOLD_GREEN\]\u\[\$__RESET_STYLE\]; fi\`\[$__BOLD_GREEN\]@\[$__RESET_STYLE\]\`if [ \"\$SSH_TTY\" ]; then echo -e \[\$__BG_PURPLE\]\[\$__BOLD_WHITE\]\h\[\$__RESET_STYLE\]; else echo -e \[\$__BOLD_GREEN\]\h\[\$__RESET_STYLE\]; fi\`\n\[$__BOLD_BLUE\]\w\[$__RESET_STYLE\]"
+  __PS1_2=" \`if [ \$UID -eq 0 ]; then echo -e \[\$__RED\]\$\[\$__RESET_STYLE\]; else echo -e \$; fi\` "
+else
+  __PS1_1="\`r=\$?; if [ \$r -eq \$__RETURN_CODE_OK ]; then echo \$__ICON_OK; elif [ \$r -eq \$__RETURN_CODE_GENERAL_ERROR ]; then echo \$__ICON_GENERAL_ERROR; elif [ \$r -eq \$__RETURN_CODE_CTRLC ]; then echo \$__ICON_CTRLC; elif [ \$r -eq \$__RETURN_CODE_KILLED ]; then echo \$__ICON_KILLED; else echo \$__ICON_UNKNOWN; fi\` \! \t \`if [ \$(jobs -r | wc -l) -eq 1 ]; then echo \(1 bg job\)\ ; elif [ \$(jobs -r | wc -l) -gt 1 ]; then echo \(\j bg jobs\)\ ; fi\`\u@\h\n\w"
+  __PS1_2=" \$ "
+fi
+PS1="${__PS1_1}${__PS1_2}"
+
+# clean vars
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+  xterm*|rxvt*)
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+    ;;
+  *)
+    ;;
+esac
