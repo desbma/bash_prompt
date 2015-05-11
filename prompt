@@ -70,13 +70,4 @@ PS1="${__PS1_1}${__PS1_2}"
 # clean vars
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-  xterm*|rxvt*)
-    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
-    ;;
-  *)
-    ;;
-esac
-
 VIRTUAL_ENV_DISABLE_PROMPT=1
