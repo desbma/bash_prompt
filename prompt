@@ -61,10 +61,14 @@ __print_rc() {
   if [ $rc -gt 128 ]
   then
     local sig=$(( $rc - 128 ))
-    echo -en "$sig / SIG_$(kill -l $sig)"
-  else
-    echo -en "$rc"
+    local sig_str=$(kill -l $sig 2> /dev/null)
+    if [ "$sig_str" ]
+    then
+      echo -en "$rc / SIG_$sig_str $sig"
+      return
+    fi
   fi
+  echo -en "$rc"
 }
 
 # PS1
